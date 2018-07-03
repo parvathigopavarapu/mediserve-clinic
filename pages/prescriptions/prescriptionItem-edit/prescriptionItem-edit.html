@@ -1,0 +1,52 @@
+<ion-header>
+  <header-main [title]="title"></header-main>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="prescription|async;let prescription;else loadingOrError">
+    <ion-item-sliding *ngFor="let prescription of prescription?.items " no-padding no-margin>
+
+      <ion-item detail-push lines no-padding no-margin>
+        <ion-row no-padding no-margin>
+          <ion-col col-3 no-padding no-margin class="x-small"> {{prescription.medicine}}-{{prescription.composition}}</ion-col>
+          <ion-col col-2 no-padding no-margin class="x-small">{{prescription.morningDose}}-{{prescription.afternoonDose}}-{{prescription.eveningDose}}</ion-col>
+          <ion-col col-2 no-padding no-margin class="x-small"> {{prescription.timings}}times</ion-col>
+          <ion-col col-2 no-padding no-margin class="x-small"> {{prescription.noOfDays}}days</ion-col>
+          <ion-col col-3 text-wrap no-padding no-margin class="x-small"> {{prescription.beforeAfter}}</ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button class="border-a" (click)="edit(prescription._id)">
+          <ion-icon name="create" class="icon-small"> </ion-icon>Edit</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <!-- <div class = "div-b" margin-left margin-right margin-top>
+          <ion-row  class = "border-r">
+            <ion-col col-4 class = "border-1">Drug</ion-col>
+            <ion-col class = "border-2">Dose</ion-col>
+            <ion-col class = "border-2">Duration</ion-col>
+            <ion-col class="border-3">Take</ion-col>
+          </ion-row>
+        </div>
+      
+        <div *ngIf="prescription | async;let prescription" >
+          <div class = "div-a" *ngFor="let prescription of prescription?.items" margin-left margin-right>
+            <ion-row class = "border-rr" padding-top padding-bottom (click) = "edit(prescription._id)" >
+              <ion-col col-4 class = "border-4" text-capitalize>{{prescription.medicine}}-{{prescription.composition}}</ion-col>
+        
+              <ion-col class = "border-5">{{prescription.morningDose}}-{{prescription.afternoonDose}}-{{prescription.eveningDose}}</ion-col>
+              <ion-col class = "border-1">{{prescription.noOfDays}}days</ion-col>
+              <ion-col class = "border-3">{{prescription.beforeAfter}}</ion-col>
+            </ion-row>
+          </div>
+        </div> -->
+
+  <ng-template #loadingOrError>
+    <page-loading [center]='center'></page-loading>
+  </ng-template>
+
+</ion-content>
+<ion-footer no-border>
+  <button ion-button (click)="details()" class="button-footer">Back to prescription</button>
+</ion-footer>

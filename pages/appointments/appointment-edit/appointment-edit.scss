@@ -1,0 +1,49 @@
+page-appointment-edit {
+  .textarea {
+    max-width: 350px !important;
+  }
+  .item {
+    background: none !important;
+  }
+  .btn {
+    width: 100% !important;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: map-get($colors, primary);
+    color: white;
+    height: 50px;
+    border-radius: 5px;
+  }
+  .btn:hover {
+    background-color: map-get($colors, danger);
+  }
+  .color1 {
+    border: 1px solid map-get($colors, primary);
+    border-radius: 5px;
+    background: map-get($colors, danger) !important;
+    color: map-get($colors, white-a) !important;
+    margin-left: 2% !important;
+    width: 98%;
+  }
+  .button2 {
+    background: none;
+    border: 1px solid map-get($colors, primary);
+    border-radius: 5px;
+    color: map-get($colors, primary);
+    width: 98%;
+  }
+  .row {
+    margin-left: 4% !important;
+    margin-right: 4% !important;
+    width: 92%;
+  }
+  .div {
+    margin-left: 4% !important;
+    margin-right: 4% !important;
+    width: 92%;
+  }
+  .bac-color {
+    background: map-get($colors, danger) !important;
+    color: map-get($colors, white-a);
+  }
+}

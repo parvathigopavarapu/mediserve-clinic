@@ -1,0 +1,60 @@
+<ion-header>
+  <header-main [title]='title'></header-main>
+</ion-header>
+
+<ion-content>
+  <ion-list no-padding no-margin *ngIf="openingHoursList|async;else loadingOrError;">
+    <ion-row class="header2" no-padding no-margin>
+      <ion-col col-4 no-padding no-margin>Day</ion-col>
+      <ion-col col-4 no-margin no-padding>Open</ion-col>
+      <ion-col col-4 no-margin no-padding>Close </ion-col>
+    </ion-row>
+
+    <ion-item-sliding *ngFor="let item of openingHoursList|async;let index=index; let odd=odd; let even=even;" class="textCenter">
+      <ion-item [ngClass]="{ odd: odd, even: even } " no-lines no-padding no-margin>
+        <ion-row no-padding no-margin>
+          <ion-col col-4 text-capitalize> {{item.dayOfWeek}}</ion-col>
+          <ion-col col-4 no-margin no-padding> {{item.opens}}</ion-col>
+          <ion-col col-4 no-margin no-padding> {{item.closes}}</ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item-options>
+        <button class="sliding_btn" ion-button (click)="edit(item._id)" [ngClass]="{ odd: odd, even: even }">
+          <ion-icon name="create" class="icon-small"></ion-icon>
+          EDIT
+        </button>
+        <button class="sliding_btn" ion-button (click)="delete(item._id)" [ngClass]="{ odd: odd, even: even }">
+          <ion-icon name="trash" class="icon-small"></ion-icon>
+          DELETE
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ng-template #loadingOrError>
+    <ion-item lines no-margin *ngFor="let i of [1,2,3,4,5]">
+      <ion-row padding-left>
+        <ion-col col-2 margin-right>
+          <div class="animated-background">
+            <div class="background-masker"></div>
+          </div>
+        </ion-col>
+        <ion-col col-3></ion-col>
+        <ion-col col-2 margin-right>
+          <div class="animated-background">
+            <div class="background-masker"></div>
+          </div>
+        </ion-col>
+        <ion-col col-3></ion-col>
+        <ion-col col-2 margin-right>
+          <div class="animated-background">
+            <div class="background-masker"></div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ng-template>
+
+  <div class="button-add" (click)="add()" bottom right>
+    <ion-icon name="add" class="icon-add" id="button"></ion-icon>
+  </div>
+</ion-content>

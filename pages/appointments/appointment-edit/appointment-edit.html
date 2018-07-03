@@ -1,0 +1,43 @@
+<ion-header>
+  <header-main [title]="title"></header-main>
+</ion-header>
+
+<ion-content>
+  
+  <div *ngIf="appointment|async;let appointment;else loadingOrError">
+    <ion-label margin-left class="small">Symptoms:</ion-label>
+    <ion-item no-lines no-margin no-padding>
+      <ion-textarea [(ngModel)]='appointment.symtoms'>Enter symptoms</ion-textarea>
+    </ion-item>
+
+    <ion-label margin-left class="small">Appointment Date:</ion-label>
+    <ion-item no-lines no-margin no-padding>
+      <ion-datetime displayFormat="DD/MM/YYYY " placeholder="Date" [(ngModel)]="appointment.appointmentDate"></ion-datetime>
+    </ion-item>
+
+
+    <ion-label margin-left class="small"> Doctor:</ion-label>
+    <ion-item no-lines no-margin no-padding>
+      <ion-select interface="action-sheet" [(ngModel)]="appointment.doctor">
+        <ion-option *ngFor="let user of user|async" value={{user.user._id}}>{{user.user.firstName}} {{user.user.lastName}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-label margin-left class="small">Appointment Time:</ion-label>
+    <ion-row>
+      <ion-col col-4 *ngFor="let time of timeSlots">
+        <button (click)="getAppointmentTime(time)" class="btn">{{time}}</button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <ng-template #loadingOrError>
+      <page-loading [center] ='center'></page-loading>
+    </ng-template>
+
+</ion-content>
+
+<ion-footer no-border>
+  <button ion-button block *ngIf="appointment|async;let appointment" (click)="UpdateAppointment(appointment)" class="button-footer"
+    no-margin no-padding>Update Appointment</button>
+</ion-footer>
